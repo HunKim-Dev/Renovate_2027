@@ -41,6 +41,7 @@ body{font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;background:va
 .ref{margin:0;cursor:zoom-in}
 .ref img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px;display:block;background:var(--bg)}
 .ref figcaption{font-size:12px;color:#3F3C38;margin-top:4px;font-weight:500}
+.ref figcaption small{display:block;font-size:11px;color:var(--sub);font-weight:400;line-height:1.4;margin-top:2px}
 .lb{position:fixed;inset:0;z-index:50;background:rgba(20,18,16,.88);display:flex;align-items:center;justify-content:center;padding:24px}
 .lb[hidden]{display:none}
 .lb figure{margin:0;max-width:min(1200px,100%);text-align:center}
@@ -365,6 +366,9 @@ body{font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;background:va
     {"src": "images/entry/entry-01.jpg", "title": "현관-신발장&중문"},
     {"src": "images/entry/entry-02.jpg", "title": "현관-신발장&중문"},
     {"src": "images/entry/entry-03.jpg", "title": "+ 중문 슬라이드 방식"}
+  ],
+  "kitchen": [
+    {"src": "images/kitchen/kitchen-01.jpg", "title": "주방-싱크대+조리공간확보", "note": "싱크볼 위 인조대리석 간이선반으로 부족한 조리대 공간 보완"}
   ]
 }</script>
 <div class="lb" id="lb" hidden><figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure><button class="lb-x" aria-label="닫기">×</button><button class="lb-p" aria-label="이전">‹</button><button class="lb-n" aria-label="다음">›</button></div>
@@ -665,11 +669,11 @@ document.querySelectorAll('.memo[data-ref]').forEach(m=>{
   const title = m.querySelector('b').textContent;
   m.classList.add('has');
   m.innerHTML = `<b>${esc(title)}</b><div class="refs">` + list.map((r,i)=>
-    `<figure class="ref" data-i="${i}"><img src="${esc(r.src)}" alt="${esc(r.title||'')}" loading="lazy"><figcaption>${esc(r.title||'')}</figcaption></figure>`).join('') + '</div>';
+    `<figure class="ref" data-i="${i}"><img src="${esc(r.src)}" alt="${esc(r.title||'')}" loading="lazy"><figcaption>${esc(r.title||'')}${r.note?`<small>${esc(r.note)}</small>`:''}</figcaption></figure>`).join('') + '</div>';
   m.addEventListener('click', e=>{ const f=e.target.closest('.ref'); if(f) openLB(list, +f.dataset.i); });
 });
 function openLB(list,i){ LB.list=list; LB.i=i; showLB(); $('lb').hidden=false; }
-function showLB(){ const r=LB.list[LB.i]; $('lbImg').src=r.src; $('lbCap').textContent=`${r.title||''}  (${LB.i+1}/${LB.list.length})`; }
+function showLB(){ const r=LB.list[LB.i]; $('lbImg').src=r.src; $('lbCap').textContent=`${r.title||''}${r.note?' — '+r.note:''}  (${LB.i+1}/${LB.list.length})`; }
 const stepLB = d=>{ LB.i=(LB.i+d+LB.list.length)%LB.list.length; showLB(); };
 $('lb').addEventListener('click', e=>{
   if(e.target.closest('.lb-p')) return stepLB(-1);
