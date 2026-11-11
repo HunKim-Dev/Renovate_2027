@@ -1,0 +1,6 @@
+# Vercel CLI 로컬 설정
+.vercel
+
+# OS
+.DS_Store
+Thumbs.db
