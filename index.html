@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인테리어 계획 · 공급 61㎡ / 전용 42㎡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EC; --paper:#FFFFFF; --ink:#272523; --sub:#6E6A64; --line:#E4DED4;
+  --accent:#B4602A; --accent-soft:#F4E4D7;
+  --wood:#EADBC4; --tile:#DEDDD8; --bal:#D2D1CC; --util:#CBD8E8; --dark:#3B3936; --wall:#2E2C2A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.55}
+.slide{min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:28px 40px}
+.card{width:100%;max-width:1280px;background:var(--paper);border-radius:20px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px rgba(60,40,20,.07);padding:28px 40px;display:grid;grid-template-columns:1.55fr 1fr;gap:20px 36px;align-items:center}
+.card.full{grid-template-columns:1fr}
+.card.full .plan svg{max-height:calc(100vh - 340px);max-height:calc(100svh - 340px)}
+.head{grid-column:1/-1;display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:16px}
+.head .no{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--accent)}
+.head h2{font-size:30px;font-weight:900;letter-spacing:-.02em}
+.head .tag{font-size:13px;color:var(--sub)}
+.plan{width:100%;background:#FBFAF7;border:1px solid var(--line);border-radius:14px;padding:12px}
+.plan svg{display:block;width:100%;height:auto;max-height:calc(100vh - 260px);max-height:calc(100svh - 260px);margin:0 auto}
+.info{display:flex;flex-direction:column;gap:14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--bg);border-radius:12px;padding:12px 14px}
+.stat b{display:block;font-size:22px;font-weight:900;letter-spacing:-.02em}
+.stat span{font-size:12px;color:var(--sub)}
+.box h3{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.box h3::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--accent)}
+.box ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.box li{font-size:14px;color:#3F3C38;padding-left:14px;position:relative}
+.box li::before{content:"";position:absolute;left:2px;top:.7em;width:5px;height:5px;border-radius:50%;background:#C9BFB1}
+.memo{border:1.5px dashed #D8CFC2;border-radius:12px;padding:12px 14px;font-size:13px;color:#A39A8E;min-height:76px}
+.memo.has{border-style:solid;border-color:var(--line);color:var(--ink)}
+.refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:6px}
+.ref{margin:0;cursor:zoom-in}
+.ref img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px;display:block;background:var(--bg)}
+.ref figcaption{font-size:12px;color:#3F3C38;margin-top:4px;font-weight:500}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(20,18,16,.88);display:flex;align-items:center;justify-content:center;padding:24px}
+.lb[hidden]{display:none}
+.lb figure{margin:0;max-width:min(1200px,100%);text-align:center}
+.lb img{max-width:100%;max-height:82vh;border-radius:8px}
+.lb figcaption{color:#fff;font-size:14px;margin-top:10px}
+.lb button{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:44px;height:44px;font-size:26px;line-height:1;cursor:pointer}
+.lb-x{top:16px;right:16px}.lb-p{left:12px;top:50%}.lb-n{right:12px;top:50%}
+.memo b{color:var(--sub);font-weight:700;display:block;margin-bottom:4px;font-size:12px;letter-spacing:.05em}
+.note{font-size:12px;color:var(--sub)}
+.hero{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.hero h1{font-size:40px;font-weight:900;letter-spacing:-.03em;line-height:1.15}
+.hero h1 small{display:block;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.14em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--bg);border-radius:999px;padding:8px 14px;font-size:14px}
+.chip b{font-weight:900}
+.legend{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13px;color:#3F3C38}
+.legend i{display:inline-block;vertical-align:-3px;margin-right:6px}
+.two{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.ed{grid-column:1/-1;display:flex;flex-direction:column;gap:10px;font-size:13px}
+.ed-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.ed-t{font-size:12px;font-weight:700;color:var(--sub);min-width:70px}
+.ed-types{display:flex;flex-wrap:wrap;gap:6px}
+.tchip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;color:#3F3C38;cursor:pointer}
+.tchip i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.tchip.sq i{border-radius:2px}
+.tchip em{font-style:normal;color:var(--sub);font-size:12px}
+.tchip.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 2px rgba(180,96,42,.15)}
+.ed-sel{background:var(--bg);border-radius:12px;padding:8px 10px}
+.ed-sel input,.ed-sel select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff}
+.ed-sel input{width:150px}
+.btn{font:inherit;font-size:13px;font-weight:700;border-radius:8px;padding:7px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.danger{color:#B3261E;border-color:#EBC4C0}
+.btn.ghost{background:transparent}
+.ed-foot{justify-content:space-between}
+.ed-hint{color:var(--sub);font-size:12px}
+.ed-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.ed-status{font-size:12px;color:var(--sub)}
+.ed-status.dirty{color:var(--accent);font-weight:700}
+.plan.adding svg{cursor:crosshair}
+#olayer .pt{cursor:grab;touch-action:none}
+#olayer .pt.drag{cursor:grabbing}
+#olayer .pt.sel .ring{stroke:#272523;stroke-width:3;stroke-dasharray:5 4;fill:none}
+.std{grid-column:1/-1;background:var(--accent-soft);border-radius:12px;padding:14px 16px;font-size:13px;color:#5A3A22}
+.std a{color:#8A4517}
+/* nav */
+.nav{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:10}
+.nav a{width:9px;height:9px;border-radius:50%;background:#CFC6B9;display:block;transition:.2s}
+.nav a.on{background:var(--accent);transform:scale(1.35)}
+.counter{position:fixed;left:20px;bottom:16px;font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.08em;z-index:10;background:rgba(245,242,236,.9);padding:4px 10px;border-radius:999px}
+.bar{position:fixed;left:0;top:0;height:3px;background:var(--accent);z-index:11;transition:width .2s}
+/* svg text */
+.lbl{font-family:"Noto Sans KR",sans-serif;font-weight:700;fill:#2E2C2A}
+.lbl-s{font-family:"Noto Sans KR",sans-serif;font-weight:500;fill:#6E6A64}
+.dim{font-family:"Noto Sans KR",sans-serif;font-weight:700;fill:var(--accent)}
+@media (max-width:900px){
+  .plan svg{max-height:none}
+  html{scroll-snap-type:none}
+  .slide{min-height:auto;padding:14px 12px}
+  .slide:first-child{padding-top:20px}
+  .card{grid-template-columns:1fr;padding:22px 18px;gap:20px;border-radius:16px}
+  .head h2{font-size:22px}
+  .hero h1{font-size:28px}
+  .two{grid-template-columns:1fr}
+  .nav{display:none}
+  .plan{padding:6px}
+}
+@media print{.nav,.counter,.bar{display:none}.slide{page-break-after:always;min-height:auto}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<nav class="nav" id="nav"></nav>
+<div class="counter" id="counter">01 / 10</div>
+
+<!-- 1. 평면도 -->
+<section class="slide" id="s1">
+  <div class="card full">
+    <div class="hero">
+      <h1><small>01 · FLOOR PLAN</small>인테리어 계획<br>전체 평면도</h1>
+      <div class="chips">
+        <span class="chip">공급 <b>61㎡</b> (약 18.5평)</span>
+        <span class="chip">전용 <b>42㎡</b> (약 12.7평)</span>
+        <span class="chip">방 1 · 거실 1 · 욕실 1</span>
+        <span class="chip">주방 · 다용도실 · 발코니 2</span>
+      </div>
+    </div>
+    <div class="plan" data-plan="full"></div>
+    <p class="note">※ 각 공간 치수는 전용 42㎡ 기준 도면 비율로 계산한 <b>추정치</b>입니다. 시공 전 반드시 실측 후 수정하세요. (1평 = 3.3058㎡)</p>
+  </div>
+</section>
+
+<!-- 2. 현관 -->
+<section class="slide" id="s2">
+  <div class="card">
+    <div class="head"><h2>현관</h2><span class="no">02 · ENTRANCE</span></div>
+    <div class="plan" data-plan="entry"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 1.2 × 1.8m</b><span>추정 크기</span></div>
+        <div class="stat"><b>약 2.0㎡</b><span>추정 면적 (0.6평)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>타일 바닥, 현관문은 좌측 복도 쪽으로 열림</li>
+        <li>주방과 단차 없이 바로 연결되는 오픈형</li>
+        <li>우측 상단에 붙박이 수납(진한 색 영역)</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>신발장 위치·깊이 (문 열림 반경 확인)</li>
+        <li>중문 설치 여부 / 현관 타일 교체</li>
+        <li>센서등, 전신거울</li>
+      </ul></div>
+      <div class="memo" data-ref="entry"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 주방 -->
+<section class="slide" id="s3">
+  <div class="card">
+    <div class="head"><h2>주방</h2><span class="no">03 · KITCHEN</span></div>
+    <div class="plan" data-plan="kitchen"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 4.5 × 2.9m</b><span>추정 크기 (식사공간 포함)</span></div>
+        <div class="stat"><b>약 2.1m</b><span>상부 일자형 상판 길이(추정)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>일자형 싱크대: 쿡탑(좌) + 개수대(우)</li>
+        <li>거실과는 슬라이딩 도어(가벽)로 구분</li>
+        <li>하단 벽에 다용도실·화장실 출입문</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>냉장고 위치 (상판 좌측 수납 자리 활용 여부)</li>
+        <li>식탁 크기·위치, 펜던트 조명</li>
+        <li>상·하부장 교체 / 상판·타일 색상</li>
+        <li>인덕션 전용 회로 필요 여부</li>
+      </ul></div>
+      <div class="memo" data-ref="kitchen"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 다용도실 -->
+<section class="slide" id="s4">
+  <div class="card">
+    <div class="head"><h2>다용도실</h2><span class="no">04 · UTILITY</span></div>
+    <div class="plan" data-plan="util"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 0.75 × 1.6m</b><span>추정 크기</span></div>
+        <div class="stat"><b>약 1.2㎡</b><span>추정 면적 (0.4평)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>주방 쪽에서 출입하는 좁고 긴 공간</li>
+        <li>우측에 배관 샤프트(진한 색 영역)</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>세탁기(+건조기 직렬) 폭 실측 — 폭이 좁을 수 있음</li>
+        <li>급수·배수 위치 확인</li>
+        <li>세탁기용 접지 콘센트, 선반 수납</li>
+      </ul></div>
+      <div class="memo" data-ref="util"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 화장실 -->
+<section class="slide" id="s5">
+  <div class="card">
+    <div class="head"><h2>화장실</h2><span class="no">05 · BATHROOM</span></div>
+    <div class="plan" data-plan="bath"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 2.0 × 1.6m</b><span>추정 크기</span></div>
+        <div class="stat"><b>약 3.1㎡</b><span>추정 면적 (0.9평)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>좌측 욕조, 하단 세면대, 우측 하단 변기</li>
+        <li>문은 우측 상단(주방 방향)</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>욕조 유지 vs 샤워부스 전환</li>
+        <li>타일 덧방/철거, 방수 범위</li>
+        <li>수납장·거울, 환풍기, 비데용 콘센트</li>
+      </ul></div>
+      <div class="memo" data-ref="bath"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 작은방 -->
+<section class="slide" id="s6">
+  <div class="card">
+    <div class="head"><h2>작은방</h2><span class="no">06 · ROOM</span></div>
+    <div class="plan" data-plan="small"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 2.4 × 2.6m</b><span>추정 크기</span></div>
+        <div class="stat"><b>약 6.2㎡</b><span>추정 면적 (1.9평)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>문은 우측 상단 — 주방으로 연결</li>
+        <li>좌측 벽 전체가 창 → 작은 발코니</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>용도: 침실 / 서재 / 드레스룸</li>
+        <li>침대(SS 1100 / Q 1500) 배치 가능 폭 확인</li>
+        <li>커튼·블라인드, 벽지, 조명</li>
+      </ul></div>
+      <div class="memo" data-ref="small"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6-2. 작은방 발코니 -->
+<section class="slide" id="s6b">
+  <div class="card">
+    <div class="head"><h2>작은방 발코니</h2><span class="no">07 · ROOM BALCONY</span></div>
+    <div class="plan" data-plan="balL"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 1.3 × 2.0m</b><span>추정 크기</span></div>
+        <div class="stat"><b>약 2.6㎡</b><span>추정 면적 (0.8평)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>작은방 좌측 창을 통해 출입</li>
+        <li>타일 바닥, 외벽 2면 노출</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>용도: 수납 창고 / 화분·취미 / 보조 세탁·건조</li>
+        <li>결로·곰팡이 → 탄성코트·단열 확인</li>
+        <li>샷시·방충망 상태, 바닥 타일·배수구</li>
+        <li>조명·방수 콘센트 필요 여부</li>
+      </ul></div>
+      <div class="memo" data-ref="balL"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. 거실 -->
+<section class="slide" id="s7">
+  <div class="card">
+    <div class="head"><h2>거실</h2><span class="no">08 · LIVING</span></div>
+    <div class="plan" data-plan="living"></div>
+    <div class="info">
+      <div class="stats">
+        <div class="stat"><b>약 3.4 × 4.5m</b><span>추정 크기</span></div>
+        <div class="stat"><b>약 15.3㎡</b><span>추정 면적 (4.6평)</span></div>
+      </div>
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>집에서 가장 넓은 공간 (거실 겸 침실 가능)</li>
+        <li>좌측: 주방과 슬라이딩 도어 / 우측: 큰 창 → 발코니</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>TV 벽 vs 소파 배치 방향</li>
+        <li>슬라이딩 도어 유지·교체(유리 중문 등)</li>
+        <li>조명 계획(메인 + 간접), 에어컨 위치</li>
+      </ul></div>
+      <div class="memo" data-ref="living"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 발코니 -->
+<section class="slide" id="s8">
+  <div class="card full">
+    <div class="head"><h2>베란다 (거실 발코니)</h2><span class="no">09 · BALCONY</span></div>
+    <div class="plan" data-plan="balcony"></div>
+    <div class="two" style="grid-template-columns:1fr 1fr">
+      <div class="box"><h3>현재 구성</h3><ul>
+        <li>추정 약 1.3 × 4.5m · 약 5.8㎡</li>
+        <li>거실 전면 창 → 채광 핵심 공간</li>
+        <li>확장 여부 / 바닥 타일 / 빨래 건조대</li>
+      </ul></div>
+      <div class="box"><h3>체크포인트</h3><ul>
+        <li>결로·곰팡이 → 탄성코트/단열 확인</li>
+        <li>샷시 상태(기밀·방충망)</li>
+        <li>방수 콘센트·조명 필요 여부</li>
+      </ul></div>
+    </div>
+    <div class="two" style="grid-template-columns:1fr 1fr">
+      <div class="memo" data-ref="balcony"><b>MEMO · 레퍼런스</b>여기에 사진·자재를 추가하세요</div>
+      <div class="memo" data-ref="balcony-sash"><b>MEMO · 샷시·탄성코트 등</b>여기에 사진·자재를 추가하세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. 전기 -->
+<section class="slide" id="s9">
+  <div class="card full">
+    <div class="head"><h2>전기 배선 · 콘센트 계획</h2><span class="no">10 · ELECTRIC</span></div>
+    <div class="plan" data-plan="electric"></div>
+    <div class="ed" id="ed">
+      <div class="ed-row">
+        <span class="ed-t">추가할 종류</span>
+        <div class="ed-types" id="edTypes"></div>
+      </div>
+      <div class="ed-row ed-sel" id="edSel" hidden>
+        <span class="ed-t">선택한 점</span>
+        <input id="edLabel" type="text" placeholder="이름 (예: 냉장고)" maxlength="12">
+        <select id="edType"></select>
+        <select id="edPos"><option value="b">이름 아래</option><option value="t">이름 위</option><option value="l">이름 왼쪽</option><option value="r">이름 오른쪽</option></select>
+        <button class="btn danger" id="edDel">삭제</button>
+        <button class="btn ghost" id="edDone">선택 해제</button>
+      </div>
+      <div class="ed-row ed-foot">
+        <span class="ed-hint" id="edHint">종류를 누른 뒤 평면도를 클릭하면 추가 · 점을 드래그하면 이동 · 점을 누르면 이름 수정/삭제</span>
+        <span class="ed-actions"><span class="ed-status" id="edStatus"></span><button class="btn ghost" id="edCopy" hidden>배치 복사</button><button class="btn ghost" id="edUndo" disabled>되돌리기</button><button class="btn primary" id="edSave" disabled>저장</button></span>
+      </div>
+    </div>
+    <div class="std">
+      <b>콘센트 기준 (한국전기설비규정 KEC 234.5)</b> — 주택 옥내전로에는 접지극이 있는 콘센트를 사용해야 하고, 욕실처럼 몸이 젖은 상태로 전기를 쓰는 곳은 <b>방적형 접지 콘센트</b> + <b>인체감전보호용 누전차단기(정격감도전류 15mA 이하·동작시간 0.03초 이하)</b>로 보호된 전로에 연결해야 합니다.
+      <br><span style="opacity:.8">※ 위 콘센트 위치는 <b>계획(제안)안</b>입니다. 점을 추가·이동·삭제한 뒤 <b>저장</b>을 누르세요. (claude.ai 링크: 모든 사람에게 반영 / 그 외 주소: 내 브라우저에만 저장) 기존 콘센트·분전반 위치는 현장 확인 후 이 장에 반영하세요. 전기공사는 전기공사업 등록업체 시공 대상입니다.</span>
+    </div>
+  </div>
+</section>
+
+<script id="ref-data" type="application/json">{
+  "entry": [
+    {"src": "images/entry/entry-01.jpg", "title": "현관-신발장&중문"},
+    {"src": "images/entry/entry-02.jpg", "title": "현관-신발장&중문"}
+  ]
+}</script>
+<div class="lb" id="lb" hidden><figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure><button class="lb-x" aria-label="닫기">×</button><button class="lb-p" aria-label="이전">‹</button><button class="lb-n" aria-label="다음">›</button></div>
+<script id="outlet-data" type="application/json">[
+  [300,112,"sw","월패드","b"],
+  [480,175,"gen","냉장고","b"],[590,155,"ded","인덕션","b"],[690,155,"gen","조리대","b"],[810,155,"gen","조리대","b"],
+  [572,400,"gen","식탁","r"],[900,112,"gen","","b"],
+  [278,620,"gen","","b"],[548,560,"gen","책상","l"],[410,652,"gen","침대","t"],[300,345,"ded","에어컨","b"],
+  [618,645,"wet","세탁기","t"],
+  [930,478,"wet","비데","b"],[790,652,"wet","드라이어","t"],
+  [985,560,"tv","TV","r"],[985,610,"gen","","r"],[1190,112,"gen","","b"],[1190,652,"gen","","t"],[1385,130,"ded","에어컨","l"],
+  [1545,470,"wet","방수","b"]
+]</script>
+<script>
+// ---------- 평면도 데이터 (단위: 도면 px, 약 124px = 1m) ----------
+const PX = 124;
+const R = {
+  entry:  {name:'현관',     poly:[[265,105],[408,105],[408,325],[265,325]], fill:'var(--tile)', lx:336, ly:215, dim:[265,105,408,325]},
+  kitchen:{name:'주방',     poly:[[408,165],[555,165],[555,145],[818,145],[818,105],[965,105],[965,460],[565,460],[565,330],[408,330]], fill:'var(--wood)', lx:760, ly:300, dim:[408,105,965,460]},
+  small:  {name:'작은방',   poly:[[265,335],[557,335],[557,660],[265,660]], fill:'var(--wood)', lx:411, ly:505, dim:[265,335,557,660]},
+  util:   {name:'다용도실', poly:[[572,465],[665,465],[665,660],[572,660]], fill:'var(--util)', lx:618, ly:560, dim:[572,465,665,660], vertical:true},
+  bath:   {name:'화장실',   poly:[[722,465],[965,465],[965,660],[722,660]], fill:'var(--tile)', lx:860, ly:540, dim:[722,465,965,660]},
+  living: {name:'거실',     poly:[[975,105],[1400,105],[1400,660],[975,660]], fill:'var(--wood)', lx:1188, ly:390, dim:[975,105,1400,660]},
+  balR:   {name:'발코니',   poly:[[1408,105],[1570,105],[1570,660],[1408,660]], fill:'var(--bal)', lx:1489, ly:390, dim:[1408,105,1570,660]},
+  balL:   {name:'발코니',   poly:[[100,410],[258,410],[258,660],[100,660]], fill:'var(--bal)', lx:179, ly:540, dim:[100,410,258,660]},
+};
+const VIEWS = {
+  full:    {vb:'60 60 1570 640', hl:[]},
+  entry:   {vb:'80 70 520 350',  hl:['entry']},
+  kitchen: {vb:'240 60 790 460', hl:['kitchen']},
+  util:    {vb:'480 400 540 300', hl:['util']},
+  bath:    {vb:'540 400 480 300', hl:['bath']},
+  small:   {vb:'70 290 560 410', hl:['small']},
+  balL:    {vb:'70 300 560 400', hl:['balL']},
+  living:  {vb:'920 60 690 640', hl:['living']},
+  balcony: {vb:'60 60 1570 640', hl:['balR']},
+  electric:{vb:'60 60 1570 640', hl:[], outlets:true},
+};
+// 콘센트 계획 (제안)
+const OT = {
+  gen:{c:'#B4602A', label:'일반 접지 콘센트 (2구)'},
+  ded:{c:'#7A3FB5', label:'전용 회로 (인덕션·에어컨)'},
+  wet:{c:'#1F7AB8', label:'방적형 + 누전차단기 15mA (욕실·세탁)'},
+  tv: {c:'#2E8B57', label:'TV · 통신'},
+  sw: {c:'#555',    label:'분전반 / 월패드 (현장 확인)'},
+};
+let SAVED = [];
+try{ SAVED = JSON.parse(document.getElementById('outlet-data').textContent); }catch(e){ SAVED = []; }
+let OUTLETS = SAVED.map(o=>o.slice());
+
+function svgPlan(key){
+  const v = VIEWS[key], hl = v.hl, any = hl.length>0;
+  const P = a=>a.map(p=>p.join(',')).join(' ');
+  let s = `<svg viewBox="${v.vb}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="평면도">`;
+  s += `<defs><pattern id="tl" width="34" height="34" patternUnits="userSpaceOnUse"><rect width="34" height="34" fill="none"/><path d="M34 0H0V34" fill="none" stroke="rgba(0,0,0,.07)" stroke-width="1.5"/></pattern>
+  <pattern id="wd" width="90" height="18" patternUnits="userSpaceOnUse"><path d="M0 18H90M45 0V18" stroke="rgba(120,80,30,.08)" stroke-width="1.5"/></pattern></defs>`;
+  // 바깥 복도
+  s += `<rect x="100" y="97" width="150" height="308" fill="#F2F0EB"/>`;
+  s += `<text x="175" y="160" text-anchor="middle" class="lbl-s" font-size="18">복도</text>`;
+  // 방들
+  for(const [id,r] of Object.entries(R)){
+    const dim = any && !hl.includes(id);
+    const pat = (r.fill.includes('tile')||r.fill.includes('bal'))?'tl':'wd';
+    s += `<g opacity="${dim?0.35:1}"><polygon points="${P(r.poly)}" fill="${r.fill}"/><polygon points="${P(r.poly)}" fill="url(#${pat})"/></g>`;
+  }
+  // 고정 요소
+  const op = id => (any && !hl.includes(id)) ? 0.35 : 1;
+  s += `<g opacity="${op('kitchen')}">
+    <rect x="408" y="105" width="147" height="60" fill="var(--dark)"/>
+    <text x="481" y="141" text-anchor="middle" font-size="15" fill="#fff" class="lbl" style="fill:#fff">수납/냉장고</text>
+    <rect x="555" y="105" width="263" height="40" fill="#fff" stroke="#BDB7AE" stroke-width="2"/>
+    <rect x="562" y="110" width="72" height="30" rx="3" fill="#3A3A3A"/>
+    <circle cx="580" cy="125" r="9" fill="none" stroke="#bbb" stroke-width="2"/><circle cx="610" cy="125" r="9" fill="none" stroke="#bbb" stroke-width="2"/>
+    <rect x="720" y="111" width="70" height="28" rx="4" fill="#E6E6E3" stroke="#AAA" stroke-width="2"/></g>`;
+  s += `<rect x="665" y="460" width="57" height="205" fill="var(--dark)" opacity="${any?0.35:1}"/>`;
+  s += `<g opacity="${op('bath')}">
+    <rect x="728" y="472" width="62" height="182" rx="18" fill="#fff" stroke="#AAA" stroke-width="2"/>
+    <rect x="802" y="612" width="76" height="44" rx="6" fill="#fff" stroke="#AAA" stroke-width="2"/>
+    <ellipse cx="928" cy="625" rx="24" ry="30" fill="#fff" stroke="#AAA" stroke-width="2"/></g>`;
+  // 벽
+  const W = (x1,y1,x2,y2,w=12)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--wall)" stroke-width="${w}" stroke-linecap="square"/>`;
+  const G = (x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#9FB7C9" stroke-width="5"/>`;
+  s += W(260,97,1578,97)+W(1578,97,1578,665)+W(1578,665,95,665)+W(95,665,95,405)+W(95,405,260,405)+W(95,405,95,100,4);
+  s += W(260,97,260,200)+W(260,320,260,435)+W(260,635,260,665)+G(260,435,260,635);
+  s += W(260,330,475,330,10)+W(560,330,560,665,10);
+  s += W(565,460,585,460,10)+W(655,460,880,460,10)+W(955,460,970,460,10);
+  s += W(665,460,665,665,8)+W(722,460,722,665,8);
+  s += W(970,97,970,145)+W(970,435,970,665)+`<line x1="966" y1="145" x2="966" y2="435" stroke="#C8C2B8" stroke-width="5"/><line x1="974" y1="145" x2="974" y2="435" stroke="#C8C2B8" stroke-width="5"/>`;
+  s += W(1405,97,1405,155)+W(1405,610,1405,665)+G(1405,155,1405,610);
+  // 문 (열림 호)
+  s += `<path d="M260 200 L190 200 A70 70 0 0 1 260 270" fill="none" stroke="#8D867C" stroke-width="2"/>`;        // 현관문
+  s += `<path d="M475 330 L475 405 A75 75 0 0 0 550 330" fill="none" stroke="#8D867C" stroke-width="2"/>`;        // 작은방
+  s += `<path d="M655 460 L655 530 A70 70 0 0 1 585 460" fill="none" stroke="#8D867C" stroke-width="2"/>`;        // 다용도실
+  s += `<path d="M955 460 L955 535 A75 75 0 0 1 880 460" fill="none" stroke="#8D867C" stroke-width="2"/>`;        // 화장실
+  // 라벨
+  for(const [id,r] of Object.entries(R)){
+    const isHl = hl.includes(id);
+    if(any && !isHl && !['kitchen','living','small'].includes(id) && VIEWS[key].vb!=='60 60 1570 640') {}
+    const fs = id==='util'?20:26;
+    if(id==='util'){
+      s += `<text x="${r.lx}" y="${r.ly-12}" text-anchor="middle" class="lbl" font-size="${fs}" opacity="${op(id)}">다용</text><text x="${r.lx}" y="${r.ly+14}" text-anchor="middle" class="lbl" font-size="${fs}" opacity="${op(id)}">도실</text>`;
+    } else {
+      s += `<text x="${r.lx}" y="${r.ly}" text-anchor="middle" class="lbl" font-size="${fs}" opacity="${op(id)}">${r.name}</text>`;
+    }
+    if(key==='full' || key==='balcony'){
+      const [x1,y1,x2,y2]=r.dim; const a=((x2-x1)/PX)*((y2-y1)/PX);
+      if(id!=='kitchen') s += `<text x="${r.lx}" y="${r.ly+(id==='util'?40:28)}" text-anchor="middle" class="lbl-s" font-size="16" opacity="${op(id)}">약 ${a.toFixed(1)}㎡</text>`;
+    }
+  }
+  // 강조 + 치수
+  for(const id of hl){
+    const r=R[id];
+    s += `<polygon points="${P(r.poly)}" fill="none" stroke="var(--accent)" stroke-width="5" stroke-dasharray="${key==='balcony'?'':''}"/>`;
+    const [x1,y1,x2,y2]=r.dim, f=v=>v<1?v.toFixed(2):v.toFixed(1), wm=f((x2-x1)/PX), hm=f((y2-y1)/PX);
+    const fs = key==='balcony'?18:16;
+    // 가로
+    const yy = y1-22;
+    s += `<line x1="${x1}" y1="${yy}" x2="${x2}" y2="${yy}" stroke="var(--accent)" stroke-width="2"/><line x1="${x1}" y1="${yy-7}" x2="${x1}" y2="${yy+7}" stroke="var(--accent)" stroke-width="2"/><line x1="${x2}" y1="${yy-7}" x2="${x2}" y2="${yy+7}" stroke="var(--accent)" stroke-width="2"/>`;
+    s += `<rect x="${(x1+x2)/2-34}" y="${yy-13}" width="68" height="24" rx="4" fill="#fff"/><text x="${(x1+x2)/2}" y="${yy+5}" text-anchor="middle" class="dim" font-size="${fs}">${wm}m</text>`;
+    // 세로
+    const xx = x2+24;
+    s += `<line x1="${xx}" y1="${y1}" x2="${xx}" y2="${y2}" stroke="var(--accent)" stroke-width="2"/><line x1="${xx-7}" y1="${y1}" x2="${xx+7}" y2="${y1}" stroke="var(--accent)" stroke-width="2"/><line x1="${xx-7}" y1="${y2}" x2="${xx+7}" y2="${y2}" stroke="var(--accent)" stroke-width="2"/>`;
+    s += `<rect x="${xx-30}" y="${(y1+y2)/2-12}" width="60" height="24" rx="4" fill="#fff"/><text x="${xx}" y="${(y1+y2)/2+6}" text-anchor="middle" class="dim" font-size="${fs}">${hm}m</text>`;
+  }
+  // 콘센트
+  if(v.outlets) s += `<g id="olayer"></g>`;
+  return s+'</svg>';
+}
+document.querySelectorAll('[data-plan]').forEach(el=>el.innerHTML=svgPlan(el.dataset.plan));
+
+// ---------- 콘센트 편집기 ----------
+const esc = t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = id=>document.getElementById(id);
+const planEl = document.querySelector('[data-plan="electric"]');
+const svgEl = planEl.querySelector('svg');
+const layer = $('olayer');
+let sel = -1, addType = null, dirty = false, saving = false;
+
+function ptSVG(i){
+  const [x,y,t,l,pos] = OUTLETS[i], c = OT[t].c;
+  let g = `<g class="pt${i===sel?' sel':''}" data-i="${i}">`;
+  g += `<circle cx="${x}" cy="${y}" r="22" fill="transparent"/>`;
+  if(t==='sw') g += `<rect x="${x-11}" y="${y-8}" width="22" height="16" rx="2" fill="${c}"/>`;
+  else g += `<circle cx="${x}" cy="${y}" r="11" fill="${c}" stroke="#fff" stroke-width="3"/><circle cx="${x-3.5}" cy="${y}" r="1.8" fill="#fff"/><circle cx="${x+3.5}" cy="${y}" r="1.8" fill="#fff"/>`;
+  if(i===sel) g += `<circle class="ring" cx="${x}" cy="${y}" r="18"/>`;
+  if(l){ const o={t:[x,y-18,'middle'],b:[x,y+30,'middle'],l:[x-17,y+5,'end'],r:[x+17,y+5,'start']}[pos||'b'];
+    g += `<text x="${o[0]}" y="${o[1]}" text-anchor="${o[2]}" class="lbl-s" font-size="15" style="fill:${c};font-weight:700;paint-order:stroke;stroke:#fff;stroke-width:4px;pointer-events:none">${esc(l)}</text>`; }
+  return g+'</g>';
+}
+function render(){
+  layer.innerHTML = OUTLETS.map((_,i)=>ptSVG(i)).join('');
+  // 종류 칩 (+개수)
+  $('edTypes').innerHTML = Object.entries(OT).map(([k,o])=>{
+    const n = OUTLETS.filter(p=>p[2]===k).length;
+    return `<button class="tchip${k==='sw'?' sq':''}${addType===k?' on':''}" data-t="${k}"><i style="background:${o.c}"></i>${o.label} <em>${n}</em></button>`;
+  }).join('');
+  // 선택 패널
+  const box = $('edSel');
+  if(sel>=0 && OUTLETS[sel]){
+    box.hidden = false;
+    const [, , t, l, pos] = OUTLETS[sel];
+    if(document.activeElement!==$('edLabel')) $('edLabel').value = l;
+    $('edType').value = t; $('edPos').value = pos||'b';
+  } else box.hidden = true;
+  planEl.classList.toggle('adding', !!addType);
+  $('edHint').textContent = addType ? `평면도를 클릭하면 "${OT[addType].label}" 점이 추가됩니다 · 다시 누르면 취소`
+    : '종류를 누른 뒤 평면도를 클릭하면 추가 · 점을 드래그하면 이동 · 점을 누르면 이름 수정/삭제';
+  $('edSave').disabled = !dirty || saving;
+  $('edUndo').disabled = !dirty || saving;
+  const st = $('edStatus');
+  st.className = 'ed-status' + (dirty?' dirty':'');
+  if(!saving && dirty) st.textContent = '저장 안 된 변경사항';
+}
+function changed(){ dirty = true; $('edStatus').textContent=''; render(); }
+$('edType').innerHTML = Object.entries(OT).map(([k,o])=>`<option value="${k}">${o.label}</option>`).join('');
+
+function toSVG(e){
+  const pt = svgEl.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY;
+  const r = pt.matrixTransform(svgEl.getScreenCTM().inverse());
+  return [Math.round(Math.min(1630,Math.max(60,r.x))), Math.round(Math.min(700,Math.max(60,r.y)))];
+}
+$('edTypes').addEventListener('click', e=>{
+  const b = e.target.closest('.tchip'); if(!b) return;
+  addType = addType===b.dataset.t ? null : b.dataset.t; render();
+});
+// 드래그 / 선택
+let drag = null, skipClick = false;
+layer.addEventListener('pointerdown', e=>{
+  const g = e.target.closest('.pt'); if(!g) return;
+  e.preventDefault(); e.stopPropagation();
+  const i = +g.dataset.i, [px,py] = toSVG(e);
+  drag = {i, dx: OUTLETS[i][0]-px, dy: OUTLETS[i][1]-py, moved:false, id:e.pointerId};
+  svgEl.setPointerCapture(e.pointerId); g.classList.add('drag'); skipClick = true;
+  if(sel!==i){ sel = i; addType = null; render(); }
+});
+svgEl.addEventListener('pointerdown', ()=>{ skipClick=false; });
+svgEl.addEventListener('pointermove', e=>{
+  if(!drag || e.pointerId!==drag.id) return;
+  const [px,py] = toSVG(e), o = OUTLETS[drag.i];
+  const nx = px+drag.dx, ny = py+drag.dy;
+  if(Math.abs(nx-o[0])+Math.abs(ny-o[1])>0){ o[0]=nx; o[1]=ny; drag.moved=true;
+    const g = layer.querySelector(`.pt[data-i="${drag.i}"]`); if(g) g.outerHTML = ptSVG(drag.i); }
+});
+const endDrag = e=>{ if(!drag || e.pointerId!==drag.id) return; const m=drag.moved; drag=null; if(m) changed(); else render(); };
+svgEl.addEventListener('pointerup', endDrag);
+svgEl.addEventListener('pointercancel', endDrag);
+// 추가 / 선택 해제
+svgEl.addEventListener('click', e=>{
+  if(skipClick){ skipClick=false; return; }
+  if(e.target.closest('.pt')) return;
+  if(addType){
+    const [x,y] = toSVG(e);
+    OUTLETS.push([x,y,addType,'','b']); sel = OUTLETS.length-1; addType = null;
+    changed(); setTimeout(()=>$('edLabel').focus(),0);
+  } else if(sel>=0){ sel=-1; render(); }
+});
+// 선택 패널
+$('edLabel').addEventListener('input', e=>{ if(sel<0) return; OUTLETS[sel][3]=e.target.value.trim(); changed(); });
+$('edType').addEventListener('change', e=>{ if(sel<0) return; OUTLETS[sel][2]=e.target.value; changed(); });
+$('edPos').addEventListener('change', e=>{ if(sel<0) return; OUTLETS[sel][4]=e.target.value; changed(); });
+const delSel = ()=>{ if(sel<0) return; OUTLETS.splice(sel,1); sel=-1; changed(); };
+$('edDel').addEventListener('click', delSel);
+$('edDone').addEventListener('click', ()=>{ sel=-1; render(); });
+$('edUndo').addEventListener('click', ()=>{ OUTLETS = SAVED.map(o=>o.slice()); sel=-1; addType=null; dirty=false; $('edStatus').textContent='마지막 저장 상태로 되돌렸어요'; render(); });
+document.addEventListener('keydown', e=>{
+  if(/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+  if((e.key==='Delete'||e.key==='Backspace') && sel>=0){ e.preventDefault(); delSel(); }
+  if(e.key==='Escape'){ sel=-1; addType=null; render(); }
+});
+window.addEventListener('beforeunload', e=>{ if(dirty){ e.preventDefault(); e.returnValue=''; } });
+
+// 저장: 이 페이지 자체를 새 버전으로 발행 → 링크를 여는 모든 사람에게 반영
+let artifactApi = null;
+const LOCAL = !window.claude;   // claude.ai 밖(Vercel 등): 내 브라우저에만 저장
+const LS_KEY = 'interior-outlets-v1';
+if(LOCAL){
+  $('edCopy').hidden = false;
+  try{ const d = JSON.parse(localStorage.getItem(LS_KEY)||'null'); if(Array.isArray(d)){ OUTLETS = d; SAVED = d.map(o=>o.slice()); } }catch(e){}
+  $('edCopy').addEventListener('click', async ()=>{
+    const txt = JSON.stringify(OUTLETS);
+    try{ await navigator.clipboard.writeText(txt); $('edStatus').textContent='배치를 복사했어요 — Claude에게 붙여넣어 주세요'; }
+    catch(e){ $('edStatus').textContent='복사 실패 — 브라우저 권한을 확인하세요'; }
+  });
+} else {
+  (async()=>{ try{ artifactApi = await window.claude.use('artifact'); }catch(e){ artifactApi=null; } })();
+}
+async function pageSource(){
+  try{ const r = await fetch(location.href.split('#')[0], {cache:'no-store'}); if(r.ok){ const t = await r.text(); if(t.includes('id="outlet-data"')) return t; } }catch(e){}
+  return null;
+}
+$('edSave').addEventListener('click', async ()=>{
+  const st = $('edStatus');
+  if(LOCAL){
+    try{ localStorage.setItem(LS_KEY, JSON.stringify(OUTLETS)); SAVED = OUTLETS.map(o=>o.slice()); dirty=false; st.textContent='이 브라우저에 저장됨'; }
+    catch(e){ st.textContent='저장 실패 — 브라우저 저장공간을 확인하세요'; }
+    render(); return;
+  }
+  if(!artifactApi){ st.textContent = '저장 기능을 불러오는 중이에요 — 잠시 후 다시 눌러주세요'; return; }
+  saving = true; render(); st.className='ed-status'; st.textContent = '저장 중…';
+  try{
+    const src = await pageSource();
+    if(!src) throw new Error('source');
+    const data = '[\n  ' + OUTLETS.map(o=>JSON.stringify(o)).join(',\n  ') + '\n]';
+    const html = src.replace(/(<script id="outlet-data" type="application\/json">)[\s\S]*?(<\/script>)/, (m,a,b)=>a+data.replace(/</g,'\\u003c')+b);
+    dirty = false;
+    await artifactApi.publish(html);
+    SAVED = OUTLETS.map(o=>o.slice()); st.textContent = '저장됨';
+  }catch(err){
+    dirty = true;
+    const code = String(err && (err.code||err.message||err));
+    st.textContent = /not_writer|not_granted/.test(code) ? '보기 전용이라 저장할 수 없어요' : /conflict/.test(code) ? '다른 곳에서 먼저 저장됐어요 — 새로고침 후 다시 시도' : '저장 실패 — 다시 시도해 주세요';
+  }finally{ saving=false; render(); }
+});
+render();
+
+// ---------- 레퍼런스 사진 (images/<공간>/ 폴더 + ref-data 목록) ----------
+let REFS = {};
+try{ REFS = JSON.parse(document.getElementById('ref-data').textContent); }catch(e){}
+const LB = {list:[], i:0};
+document.querySelectorAll('.memo[data-ref]').forEach(m=>{
+  const list = REFS[m.dataset.ref] || [];
+  if(!list.length) return;
+  const title = m.querySelector('b').textContent;
+  m.classList.add('has');
+  m.innerHTML = `<b>${esc(title)}</b><div class="refs">` + list.map((r,i)=>
+    `<figure class="ref" data-i="${i}"><img src="${esc(r.src)}" alt="${esc(r.title||'')}" loading="lazy"><figcaption>${esc(r.title||'')}</figcaption></figure>`).join('') + '</div>';
+  m.addEventListener('click', e=>{ const f=e.target.closest('.ref'); if(f) openLB(list, +f.dataset.i); });
+});
+function openLB(list,i){ LB.list=list; LB.i=i; showLB(); $('lb').hidden=false; }
+function showLB(){ const r=LB.list[LB.i]; $('lbImg').src=r.src; $('lbCap').textContent=`${r.title||''}  (${LB.i+1}/${LB.list.length})`; }
+const stepLB = d=>{ LB.i=(LB.i+d+LB.list.length)%LB.list.length; showLB(); };
+$('lb').addEventListener('click', e=>{
+  if(e.target.closest('.lb-p')) return stepLB(-1);
+  if(e.target.closest('.lb-n')) return stepLB(1);
+  if(e.target.tagName!=='IMG') $('lb').hidden=true;
+});
+document.addEventListener('keydown', e=>{
+  if($('lb').hidden) return;
+  e.stopImmediatePropagation();
+  if(e.key==='Escape') $('lb').hidden=true;
+  if(e.key==='ArrowLeft') stepLB(-1);
+  if(e.key==='ArrowRight') stepLB(1);
+}, true);
+
+// ---------- 네비게이션 ----------
+const slides=[...document.querySelectorAll('.slide')], nav=document.getElementById('nav');
+slides.forEach(s=>{const a=document.createElement('a');a.href='#'+s.id;a.title=s.querySelector('h1,h2').textContent;nav.appendChild(a)});
+const dots=[...nav.children], counter=document.getElementById('counter'), bar=document.getElementById('bar');
+let cur=0;
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.45){cur=slides.indexOf(e.target);dots.forEach((d,i)=>d.classList.toggle('on',i===cur));counter.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');bar.style.width=((cur+1)/slides.length*100)+'%'}})},{threshold:[.45,.6]});
+slides.forEach(s=>io.observe(s));
+document.addEventListener('keydown',e=>{
+  if(/INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName)) return;
+  if(['ArrowDown','PageDown','ArrowRight',' '].includes(e.key)){e.preventDefault();slides[Math.min(cur+1,slides.length-1)].scrollIntoView({behavior:'smooth'})}
+  if(['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){e.preventDefault();slides[Math.max(cur-1,0)].scrollIntoView({behavior:'smooth'})}
+});
+</script>
+</body>
+</html>
